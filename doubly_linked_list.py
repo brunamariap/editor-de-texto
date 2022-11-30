@@ -10,10 +10,10 @@ class DoublyLinkedList:
     def __init__(self):
         #são 2 referencias que nao podem sair
         self.header = Node(None, None, None)
-        self.trailer = Node(None, None, None)
+        self.tail = Node(None, None, None)
         
-        self.header.next_node = self.trailer
-        self.trailer.prev_node = self.header
+        self.header.next_node = self.tail
+        self.tail.prev_node = self.header
         
         self.size = 0
 
@@ -43,7 +43,7 @@ class DoublyLinkedList:
         self.insert_between(data, self.header, self.header.next_node)
 
     def insert_last(self, data):
-        self.insert_between(data, self.trailer.prev_node, self.trailer)
+        self.insert_between(data, self.tail.prev_node, self.tail)
 
     def delete_node(self, node): #passar nó que quero apagar
         # Referência para o antecessor e o sucessor do nó que quero apagar
@@ -54,12 +54,14 @@ class DoublyLinkedList:
         predecessor.next_node = sucessor
         sucessor.prev_node = predecessor
 
+        """ self.current_node = predecessor.next_node """
+
         self.size -= 1
 
     def delete_last(self):
         if self.is_empty():
             print('Lista vazia!')
-        return self.delete_node(self.trailer.prev_node) #passo o último nó para ser deletado
+        return self.delete_node(self.tail.prev_node) #passo o último nó para ser deletado
 
     def delete_first(self):
         if self.is_empty():
@@ -75,10 +77,10 @@ class DoublyLinkedList:
 
     def clear(self):
         self.header.next_node = None
-        self.trailer.prev_node = None
+        self.tail.prev_node = None
         
-        self.header.next_node = self.trailer
-        self.trailer.prev_node = self.header
+        self.header.next_node = self.tail
+        self.tail.prev_node = self.header
         
         self.size = 0
     
@@ -86,7 +88,7 @@ class DoublyLinkedList:
         key_press = tecla
         if key_press == 'right':
             if self.current_node.next_node is None: # Chegou no final
-                self.current_node = self.trailer.prev_node 
+                self.current_node = self.tail.prev_node 
             else:
                 self.current_node = self.current_node.next_node
         elif key_press == 'left':
@@ -98,7 +100,7 @@ class DoublyLinkedList:
     def insert(self, dado):
         """ função que deve chamar insert_between para inserir um número em qualquer lugar """
         if self.is_empty():
-            self.current_node = self.trailer.prev_node
+            self.current_node = self.tail.prev_node
 
         self.insert_between(dado, self.current_node, self.current_node.next_node)
         self.current_node = self.current_node.next_node

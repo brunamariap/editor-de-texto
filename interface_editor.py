@@ -37,25 +37,25 @@ keyboard.block_key('up')
 keyboard.block_key('down')
 def press_backspace(event):
     lista.delete_last()
-    """ print()
-    lista.print_list() """
+    print()
+    lista.print_list()
 
 def press_right(event):
     lista.mover('right')
-    """ print()
-    lista.print_list() """
+    print()
+    lista.print_list()
 
 def press_left(event):
     lista.mover('left')
-    """ print()
-    lista.print_list() """
+    print()
+    lista.print_list()
 
 def key_press(event):
     key = event.char
     if key in alphabet or key in alphabet.upper() or ' ':
         lista.insert(key)
-        """ print()
-    lista.print_list() """
+        print()
+    lista.print_list()
 
 master.bind('<Key>', key_press) # Vincula uma função a uma tecla pressionada
 master.bind("<BackSpace>", press_backspace)
@@ -63,4 +63,4 @@ master.bind("<Right>", press_right)
 master.bind("<Left>", press_left)
 
 master.mainloop()
-lista.print_list()
+#lista.print_list()
